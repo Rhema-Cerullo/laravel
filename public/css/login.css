@@ -1,0 +1,41 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    /* background-image: url('../img/undraw_Work_time_re_hdyv.png');
+    background-repeat: no-repeat;
+    background-size: cover; */
+    height: 100vh;
+    max-width: 100vw;
+    overflow-x: hidden;
+} 
+
+#logincard {  
+    height: 100vh;
+    background-color: #5134E9;
+    color: white;
+    border: none;
+    border-bottom: 2px solid white;
+    color: white;
+}
+
+#loginForm
+input[type="text"]::placeholder, 
+input[type="password"]::placeholder {
+    border-radius: 0;
+    font-size: 18px;
+    background-color: transparent;
+    
+}
+input[type="submit"] {
+    border: none;
+    width: 500px;
+    margin-left: 0px;
+    background-color: orange;
+    border-radius: 0;
+}
+h1{
+    color: brown;
+    font-size: 100px;
+}
+
+
