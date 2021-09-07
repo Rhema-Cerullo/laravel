@@ -16,10 +16,10 @@ class RolesPermissions extends Migration
     {
         Schema::create('roles_permissions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('roleid');
-            $table->integer('permissionid');
-            $table->foreign('roleid')->references('id')->on('roles');
-            $table->foreign('permissionid')->references('id')->on('permissions');
+            $table->integer('role_id');
+            $table->integer('permission_id');
+            $table->foreign('role_id')->references('id')->on('roles');
+            $table->foreign('permission_id')->references('id')->on('permissions');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
         });

@@ -20,8 +20,8 @@ class CreateUsersTable extends Migration
             $table->date('dob')->nullable();
             $table->string('username')->unique();
             $table->string('password');
-            $table->string('email')->unique();
-            $table->string('email_verified_at')->nullable();
+            $table->string('email')->unique()->nullable();
+            $table->string('email_verified_at');
             $table->string('contact')->nullable();
             $table->string('status')->default("offline");
             $table->string('gender')->nullable();
