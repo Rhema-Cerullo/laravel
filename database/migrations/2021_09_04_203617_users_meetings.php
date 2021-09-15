@@ -18,6 +18,7 @@ class UsersMeetings extends Migration
             $table->bigIncrements('id');
             $table->boolean('creator');
             $table->boolean('member');
+            $table->string('user_status');
             $table->integer('user_id');
             $table->foreign('user_id')->unsigned()->references('id')->on('users');
             $table->integer('meeting_id');

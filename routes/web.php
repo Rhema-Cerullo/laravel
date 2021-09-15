@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\RegisterController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\ScheduleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,10 @@ Route::post('/authentication', function () {
 Route::get('/dashboards', function () {
     return view('dashboard');
 })->name('dashboards');
+
+Route::get('fullcalendar', [ScheduleController::class, 'index']);
+
+Route::post('fullcalendarAjax', [ScheduleController::class, 'ajax']);
 // Route::get('/', function () {
 //     return view('welcome');
 // });

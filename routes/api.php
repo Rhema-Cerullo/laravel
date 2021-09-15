@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\HTTP\Controllers\API\RegisterController;
+use App\HTTP\Controllers\API\ScheduleController;
 use App\HTTP\Controllers\API\UserController;
 
 /*
@@ -24,6 +25,9 @@ Route::get('logout', [RegisterController::class, 'logout'])->name('logout');
 
 
 Route::post('register', [RegisterController::class, 'register']);
+
+
+Route::get('scheduleTask', [ScheduleController::class, 'schedule'])->name('schedule');
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

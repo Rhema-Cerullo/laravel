@@ -18,6 +18,9 @@ class Attendance extends Migration
             $table->bigIncrements('id');
             $table->boolean('is_present');
             $table->string('details');
+            $table->string('justification');
+            $table->date('presence_day');
+            $table->string('reason');
             $table->timestamp('arrival_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('departure_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));

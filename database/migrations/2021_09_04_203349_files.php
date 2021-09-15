@@ -22,6 +22,8 @@ class Files extends Migration
             /*$table->foreign('signer_id')->unsigned()->nullable();
             $table->foreign('signer_id')->unsigned()->references('id')->on('users');*/
             $table->string('file_path');
+            $table->string('stream');
+            $table->string('status');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
         });

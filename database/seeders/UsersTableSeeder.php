@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class UsersTableSeeder extends Seeder
 {
@@ -15,45 +17,41 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-      //  factory(User::class, 10)->create();
-      User::create([
-          "name"=>'Fabulous',
-          "surname"=>'Final',
-          "username"=>'Flash',
-          "password"=>Hash::make('TheFlash'),
-          "email"=>'flash@gmail.com',
-          "email_verified_at"=>'',
-          "contact"=>'',
-          "gender"=>'Male',
-          "stamp"=>'',
-          "profilepic"=>'',
+        //  factory(User::class, 10)->create();
+        $user = User::create([
+            "name" => 'Fabulous',
+            "surname" => 'Final',
+            "username" => 'Flash',
+            "password" => Hash::make('TheFlash'),
+            "email" => 'flash@gmail.com',
+            "email_verified_at" => '',
+            "contact" => '',
+            "gender" => 'Male',
+            "stamp" => '',
+            "profilepic" => '',
+        ]);
 
-      ]);
-      User::create([
-          "name"=>'Beri',
-          "surname"=>'Becky',
-          "username"=>'Excess',
-          "password"=>Hash::make('TheFlash'),
-          "email"=>'beri@gmail.com',
-          "email_verified_at"=>'',
-          "contact"=>'',
-          "gender"=>'Female',
-          "stamp"=>'',
-          "profilepic"=>'',
+        $role = Role::create(['name' => 'Admin']);
+        $permissions = Permission::pluck('id', 'id')->all();
+        $role->syncPermissions($permissions);
+        $user->assignRole([$role->id]);
 
-      ]);
-      User::create([
-          "name"=>'Pretty',
-          "surname"=>'Sandrine',
-          "username"=>'Iris',
-          "password"=>Hash::make('TheFlash'),
-          "email"=>'don@gmail.com',
-          "email_verified_at"=>'',
-          "contact"=>'',
-          "gender"=>'Female',
-          "stamp"=>'',
-          "profilepic"=>'',
+        $user = User::create([
+            "name" => 'Pretty',
+            "surname" => 'Sandrine',
+            "username" => 'Iris',
+            "password" => Hash::make('TheFlash'),
+            "email" => 'don@gmail.com',
+            "email_verified_at" => '',
+            "contact" => '',
+            "gender" => 'Female',
+            "stamp" => '',
+            "profilepic" => '',
+        ]);
 
-      ]);
+        $role = Role::create(['name' => 'Signer']);
+        $permissions = Permission::pluck('id', 'id')->all();
+        $role->syncPermissions($permissions);
+        $user->assignRole([$role->id]);
     }
 }

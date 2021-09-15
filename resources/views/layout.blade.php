@@ -53,6 +53,7 @@
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item" href="{{ route("logout") }}"><i style="color: orange" class="fas fa-sign-out-alt"></i> logout</a>
                         </div>
+                    </div>
                 </li>
                 <li class="nav-item ">
                     <a class="nav-link" href="#"><i class="fas fa-cog nav-icon  text-white "></i>
@@ -84,7 +85,7 @@
                             Roles</a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link text-white" href="#"><i class="fas fa-calendar" style="color: white"></i>
+                        <a class="nav-link text-white" href="{{ route("schedule") }}"><i class="fas fa-calendar" style="color: white"></i>
                             Schedule Task</a>
                     </li>
                     <li class="nav-item ">

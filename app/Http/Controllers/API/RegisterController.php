@@ -146,4 +146,12 @@ class RegisterController extends BaseController
     }
 
 
+    public static function schedule(String $view = "scheduleTask")
+    {
+        if (Auth::check()) {
+            $user = Auth::user();  
+            return view('scheduleTask');
+        }
+    }
+
 }

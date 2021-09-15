@@ -19,6 +19,7 @@ class GroupChats extends Migration
             $table->string('name');
             $table->string('link');
             $table->string('description');
+            $table->string('stream');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
         });

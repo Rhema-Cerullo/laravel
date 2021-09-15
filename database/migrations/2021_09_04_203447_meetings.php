@@ -20,6 +20,8 @@ class Meetings extends Migration
             $table->date('set_day');
             $table->string('link');
             $table->timestamp('set_time');
+            $table->timestamp('started_at');
+            $table->timestamp('ended_at');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
         });
