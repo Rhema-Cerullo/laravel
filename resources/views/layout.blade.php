@@ -1,10 +1,17 @@
+@auth
+@else
+    {{  redirect('/'); }}
+@endauth
+
+
 <!doctype html>
 <html lang="en">
 
 <head>
-    <title>Dashboard</title>
+    <title>Dashboard  @yield('title')</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="{{ asset('/css/login.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/dashboard.css') }}">
@@ -73,7 +80,7 @@
 
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <h3 class="font-weight-bold"> <i class="fas fa-columns"></i> DASHBOARD </h3>
+                        <h3 class="font-weight-bold"><a class='text-white' href="{{ route('dashboard') }}"><i class="fas fa-columns"></i> DASHBOARD </a> </h3>
                     </li>
 
                     <li class="nav-item ">

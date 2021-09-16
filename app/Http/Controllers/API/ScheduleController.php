@@ -9,7 +9,7 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\API\BaseController as BaseController;
-use App\Models\Event;
+use App\Models\Task;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,105 +17,83 @@ class ScheduleController extends BaseController
 
 {
 
-    public static function schedule(String $view = "fullcalendar")
-    {
-        if (Auth::check()) {
-            $user = Auth::user();
-            return view('fullcalendar', compact('user'));
-        }
-    }
 
 
     public function index(Request $request)
 
     {
 
-        if($request->ajax()) {
+        if ($request->ajax()) {
+            $data = Task::where('user_id', Auth::user()->id)
+            ->whereDate('start', '>=', $request->start)
+                ->whereDate('end',   '<=', $request->end)
+                ->get(['id', 'title', 'start', 'end']);
 
 
-             $data = Event::whereDate('start', '>=', $request->start)
-
-                       ->whereDate('end',   '<=', $request->end)
-
-                       ->get(['id', 'title', 'start', 'end']);
-
-
-             return response()->json($data);
-
+            return response()->json($data);
         }
 
         return view('fullcalendar');
-
     }
 
 
-    public function ajax(Request $request)
+    public function ajaxTask(Request $request)
 
     {
 
 
-
         switch ($request->type) {
 
-           case 'add':
+            case 'add':
 
-              $event = Event::create([
+                $task = Task::create([
+                    'title' => $request->title,
+                    'description' => $request->description,
+                    'start' => $request->start,
+                    'end' => $request->end,
+                    'user_id' => (int) $request->user_id,
+                ]);
 
-                  'title' => $request->title,
+                return response()->json($task);
 
-                  'start' => $request->start,
-
-                  'end' => $request->end,
-
-              ]);
-
-
-
-              return response()->json($event);
-
-             break;
+                break;
 
 
 
-           case 'update':
+            case 'update':
 
-              $event = Event::find($request->id)->update([
+                $task = Task::find($request->id)->update([
 
-                  'title' => $request->title,
+                    'title' => $request->title,
 
-                  'start' => $request->start,
+                    'start' => $request->start,
 
-                  'end' => $request->end,
+                    'end' => $request->end,
 
-              ]);
-
-
-
-              return response()->json($event);
-
-             break;
+                ]);
 
 
 
-           case 'delete':
+                return response()->json($task);
 
-              $event = Event::find($request->id)->delete();
-
-
-
-              return response()->json($event);
-
-             break;
+                break;
 
 
 
-           default:
+            case 'delete':
 
-             # code...
+                $task = Task::find($request->id)->delete();
+                return response()->json($task);
 
-             break;
+                break;
 
+
+
+            default:
+
+                # code...
+
+                break;
         }
-
     }
 }

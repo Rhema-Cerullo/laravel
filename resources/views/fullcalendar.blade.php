@@ -1,20 +1,50 @@
 @extends('layout')
 
+@section('title')
+Plan Well, Forget Nothing
+@endsection
+
 @section('style')
-    <link rel="stylesheet" href="{{ asset('/css/') }}">
-    <title>Plan Well, Forget Nothing</title>
+    {{-- <link rel="stylesheet" href="{{ asset('/css/') }}"> --}}
+<style>
+    #calendar{
+        transform: scale(0.9);
+        background: rgb(248, 248, 248);
+    }
+</style>
+   {{-- <linkrel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.css"/> --}}
+   <link rel="stylesheet" href="{{ asset('/css/fullcalendar.css') }}">
+   {{-- <linkrel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/> --}}
+      <link rel="stylesheet" href="{{ asset('/css/toastr.min.css') }}">
+      {{-- <linkrel="stylesheet" href="{{ asset('/css/schedule.css') }}">--}}
+@endsection
 
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+@section('content')
+
+<div class="">
+
+    <h1>Plan Well, Forget Nothing !</h1>
+
+    <div class="container p-0 ">
+
+    <div id='calendar' class="col-10 mx-auto m-0 p-0 float-left"></div>
+
+    </div>
+
+</div>
+
+@endsection
 
 
+
+
+@section('script')
 
    {{--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" /> --}}
 
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> --}}
     <script src="{{ asset('/js/jquery.min.js') }}"></script>
 
-   {{-- <linkrel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.css"/> --}}
-    <link rel="stylesheet" href="{{ asset('/css/fullcalendar.css') }}">
 
    {{-- <scriptsrc="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script> --}}
     <script src="{{ asset('/js/moment.min.js') }}"></script>
@@ -25,21 +55,6 @@
    {{-- <scriptsrc="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script> --}}
     <script src="{{ asset('/js/toastr.min.js') }}"></script>
 
-   {{-- <linkrel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/> --}}
-    <link rel="stylesheet" href="{{ asset('/css/toastr.min.css') }}">
-    {{-- <linkrel="stylesheet" href="{{ asset('/css/schedule.css') }}">--}}
-
-@endsection
-
-@section('content')
-
-<div class="container">
-
-    <h1>Plan Well, Forget Nothing !</h1>
-
-    <div id='calendar'></div>
-
-</div>
 
 
 <script>
@@ -53,20 +68,16 @@ var SITEURL = "{{ url('/') }}";
 
 
 $.ajaxSetup({
-
     headers: {
-
     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-
     }
-
 });
 
 var calendar = $('#calendar').fullCalendar({
 
                     editable: true,
 
-                    events: SITEURL + "/fullcalender",
+                    events: SITEURL + "/api/fullcalender",
 
                     displayEventTime: false,
 
@@ -93,27 +104,24 @@ var calendar = $('#calendar').fullCalendar({
                     select: function (start, end, allDay) {
 
                         var title = prompt('Event Title:');
+                        var desc = prompt('Event Brief description:');
 
-                        if (title) {
+                        if (title && desc) {
 
                             var start = $.fullCalendar.formatDate(start, "Y-MM-DD");
-
                             var end = $.fullCalendar.formatDate(end, "Y-MM-DD");
 
                             $.ajax({
 
-                                url: SITEURL + "/fullcalenderAjax",
+                                url: SITEURL + "/api/task",
 
                                 data: {
-
                                     title: title,
-
+                                    description: desc,
                                     start: start,
-
                                     end: end,
-
+                                    user_id: {{ Auth::user()->id }},
                                     type: 'add'
-
                                 },
 
                                 type: "POST",
@@ -153,7 +161,7 @@ var calendar = $('#calendar').fullCalendar({
                     },
 
                     eventDrop: function (event, delta) {
-
+ 
                         var start = $.fullCalendar.formatDate(event.start, "Y-MM-DD");
 
                         var end = $.fullCalendar.formatDate(event.end, "Y-MM-DD");
@@ -162,7 +170,7 @@ var calendar = $('#calendar').fullCalendar({
 
                         $.ajax({
 
-                            url: SITEURL + '/fullcalenderAjax',
+                            url: SITEURL + '/api/task',
 
                             data: {
 
@@ -200,7 +208,7 @@ var calendar = $('#calendar').fullCalendar({
 
                                 type: "POST",
 
-                                url: SITEURL + '/fullcalenderAjax',
+                                url: SITEURL + '/api/task',
 
                                 data: {
 

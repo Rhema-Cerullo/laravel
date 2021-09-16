@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 
 
 
-class Event extends Model
+class Task extends Model
 
 {
 
@@ -22,7 +22,7 @@ class Event extends Model
 
     protected $fillable = [
 
-        'title', 'start', 'end'
+        'title', 'start', 'end', 'description', 'user_id'
 
     ];
 

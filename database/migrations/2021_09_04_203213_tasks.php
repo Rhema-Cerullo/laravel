@@ -17,10 +17,10 @@ class Tasks extends Migration
         Schema::create('tasks', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('title');
-            $table->string('description');
-            $table->string('status');
+            $table->string('description')->nullable();
+            $table->string('status')->default('SCHEDULED');
             $table->date('start');
-            $table->date('end');
+            $table->date('end')->nullable();
             $table->integer('user_id');
             $table->foreign('user_id')->unsigned()->references('id')->on('users');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));

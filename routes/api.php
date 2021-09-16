@@ -26,8 +26,10 @@ Route::get('logout', [RegisterController::class, 'logout'])->name('logout');
 
 Route::post('register', [RegisterController::class, 'register']);
 
+Route::post('task', [ScheduleController::class, 'ajaxTask'])->name('taskCrud');
+Route::get('fullcalender', [ScheduleController::class, 'index'])->name('fetchUserTasks');
 
-Route::get('scheduleTask', [ScheduleController::class, 'schedule'])->name('schedule');
+
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

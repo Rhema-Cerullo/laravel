@@ -134,24 +134,15 @@ class RegisterController extends BaseController
      *
      * @author NGAFANSI Rhema-C <email@gmail.com>
      */
-    public static function watcher(String $view = "dashboard")
+    public static function watcher(String $route = "dashboard")
     {
         if (Auth::check()) {
-            $user = Auth::user();
-            //dd($user);
-            return view( $view, compact('user'));
+
+            return redirect()->route($route);
         } else {
             return view('login');
         }
     }
 
-
-    public static function schedule(String $view = "scheduleTask")
-    {
-        if (Auth::check()) {
-            $user = Auth::user();  
-            return view('scheduleTask');
-        }
-    }
 
 }
