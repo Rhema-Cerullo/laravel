@@ -1,7 +1,6 @@
-@auth
-@else
-    {{  redirect('/'); }}
-@endauth
+@guest
+      {{  App\Http\Controllers\API\RegisterController::watcher( Route::currentRouteName() )  }}
+@endguest
 
 
 <!doctype html>
@@ -105,7 +104,7 @@
                             Templates</a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link text-white" href="#"><i class="fas fa-file" style="color: white"></i>
+                        <a class="nav-link text-white" href="{{ route("file.upload.post") }}"><i class="fas fa-file" style="color: white"></i>
                             Manage Files</a>
                     </li>
                     <li class="nav-item ">

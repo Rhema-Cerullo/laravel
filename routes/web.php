@@ -3,6 +3,7 @@
 use App\Http\Controllers\API\RegisterController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\ScheduleController;
+use App\Http\Controllers\FileController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -33,3 +34,10 @@ Route::post('fullcalendarAjax', [ScheduleController::class, 'ajax']);
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+Route::get('/tasks_status', function () {
+    return view('task_status');
+})->name('task_status');
+
+Route::get('file-upload', [FileController::class, 'fileUpload'])->name('file.upload');
+
+Route::post('file-upload', [FileController::class, 'fileUploadPost'])->name('file.upload.post');
